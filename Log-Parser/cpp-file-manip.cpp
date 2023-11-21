@@ -1,6 +1,27 @@
+/*
+To do: Test whether or not using a vector to store data is preferable to parse the log file,
+or if reading line-by-line will allow for better data manipulation using loops to track the following attributes:
+
+Damage Per Second - total fight length / damage tally
+Biggest Hit
+Average Hit
+Total Damage Done
+
+Add features:
+later to include melee misses or spell resists
+Snip a certain day and/or time from the log file and export to a new file to process.
+The ability to load a snipped file into variables that will display relevant info
+NPC Damage to PC
+Critical Strike / Blast support
+
+
+
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
+using namespace std;
 
 int main() {
     // Writing to a text file
@@ -19,6 +40,7 @@ int main() {
     // Reading from a text file
     std::ifstream inFile("example.txt"); // Opens a file for reading
 
+    
     if (inFile.is_open()) {
         std::string line;
         while (std::getline(inFile, line)) {
