@@ -25,7 +25,7 @@ using namespace std;
 
 int main() {
     // Writing to a text file
-    std::ofstream outFile("example.txt"); // Creates or opens a file for writing
+    std::ofstream outFile("meow.txt"); // Creates or opens a file for writing
 
     if (outFile.is_open()) {
         outFile << "Hello, this is a line written to the file." << std::endl;
@@ -38,7 +38,7 @@ int main() {
     }
 
     // Reading from a text file
-    std::ifstream inFile("example.txt"); // Opens a file for reading
+    std::ifstream inFile("meow.txt"); // Opens a file for reading
 
     
     if (inFile.is_open()) {

@@ -1,49 +1,79 @@
 #include <iostream>
-#include <vector> 
-#include <string>
-#include <cctype>
 using namespace std;
 
-int GetWordFrequency(vector<string> wordsList, string currWord) {
-   int wordCount = 0;
-   
-   // convert currWord contents to lower
-   for (int i = 0; i < currWord.length(); ++i) {
-      currWord[i] = tolower(currWord[i]);      
-   }
+class IntNode {
+   public:
+      IntNode(int value = -1, IntNode* nextLoc = nullptr);
+      void InsertAfter(IntNode* nodeLoc);
+      int GetValue();
+      IntNode* GetNext();
+      void PrintData();
+   private:
+      int value;
+      IntNode* nextIntNodePtr;
+};
 
-   // modify vector to match case check
-   for (int i = 0; i < wordsList.size(); ++i) {
-      string wordChecker = wordsList[i];
+IntNode::IntNode(int val, IntNode* nextLoc) {
+   this->value = val;
+   this->nextIntNodePtr = nextLoc;
+   cout << "Debug: New Node containing " << val << " at mem addr " << this << endl;
+}
 
-      // convert each character in the vector element to lowercase
-      for (int j = 0; j < wordChecker.length(); ++j) {
-         wordChecker[j] = tolower(wordChecker[j]);
-      }
+void IntNode::InsertAfter(IntNode* nodeLoc) {
+   IntNode* tmpNext = nullptr;
 
-      if (wordChecker == currWord) {
-         wordCount++;
-      }
-   }
+   tmpNext = this->nextIntNodePtr;
+   this->nextIntNodePtr = nodeLoc;
+   nodeLoc->nextIntNodePtr = tmpNext;
+   cout << "Debug: New Node containing " << nodeLoc->GetValue() << " value " << this->GetValue() << endl;
+}
 
-   return wordCount;
+
+int IntNode::GetValue() {
+   return this->value;
+}
+
+IntNode* IntNode::GetNext() {
+   return this->nextIntNodePtr;
+}
+
+void IntNode::PrintData() {
+   cout << this->value << endl;
+   cout << "Value: " << this->value << ", Memory Address: " << this << endl;
 }
 
 int main() {
-   int vecSize;
-   string vecFill;
+   IntNode* headObj = nullptr;
+   IntNode* node1 = nullptr;
+   IntNode* node2 = nullptr;
+   IntNode* node3 = nullptr;
+   IntNode* node4 = nullptr;
+   IntNode* currObj = nullptr;
 
-   cin >> vecSize;
+   headObj = new IntNode(-1);
 
-   vector<string> wordsList(vecSize);
-   
-   for (int i = 0; i < wordsList.size(); ++i) {
-      cin >> vecFill;
-      wordsList[i] = vecFill;
-   }
+   node1 = new IntNode(1);
+   headObj->InsertAfter(node1);
 
-   for (int i = 0; i < wordsList.size(); ++i) {
-      cout << wordsList[i] << " " << GetWordFrequency(wordsList, wordsList[i]) << endl;
+   node2 = new IntNode(15);
+   node1->InsertAfter(node2);
+
+   node3 = new IntNode(25);
+   node2->InsertAfter(node3);
+
+   node4 = new IntNode(33);
+   node3->InsertAfter(node4);
+
+   currObj = headObj;
+
+   while (currObj != nullptr) {
+      int listNum = 1;
+      if (currObj->GetValue() < 20) {
+         currObj->PrintData();
+         cout << "Cycle Number: " << listNum << endl;
+         listNum++;
+      }
+      currObj = currObj->GetNext();
    }
 
    return 0;
