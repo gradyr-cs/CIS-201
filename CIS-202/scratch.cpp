@@ -1,52 +1,53 @@
+#include <string>
 #include <iostream>
+#include <iomanip>
+#include <fstream>
+
 using namespace std;
 
-/* Returns fee charged by ebay.com given the selling
-   price of fixed-price books, movies, music, or video-games.
-   Fee is $0.50 to list plus a % of the selling price:
-   13% for $50.00 or less
-    plus 5% for $50.01 to $1000.00
-    plus 2% for $1000.01 or more
-   Source: http://pages.ebay.com/help/sell/fees.html, 2012.
-
-   Note: double variables often are not used for dollars/cents,
-   but here the dollar fraction may extend past two decimal places.
-*/
-
-// Function determines eBay price given item selling price
-double CalcEbayFee(double sellPrice) {
-   const double BASE_LIST_FEE     = 0.50; // Listing Fee
-   const double PERC_50_OR_LESS   = 0.13; // % $50 or less
-   const double PERC_50_TO_1000   = 0.05; // % $50.01..$1000.00
-   const double PERC_1000_OR_MORE = 0.02; // % $1000.01 or more
-   double feeTotal;                       // Resulting eBay fee
-
-   feeTotal = BASE_LIST_FEE;
-
-   // Determine additional fee based on selling price
-   if (sellPrice <= 50.00) { // $50.00 or lower
-      feeTotal = feeTotal + (sellPrice * PERC_50_OR_LESS);
-   }
-   else if (sellPrice <= 1000.00) { // $50.01..$1000.00
-      feeTotal = feeTotal + (50 * PERC_50_OR_LESS )
-      + ((sellPrice - 50) * PERC_50_TO_1000);
-   }
-   else { // $1000.01 and higher
-      feeTotal = feeTotal + (50 * PERC_50_OR_LESS)
-      + ((1000 - 50) * PERC_50_TO_1000)
-      + ((sellPrice - 1000) * PERC_1000_OR_MORE);
-   }
-
-   return feeTotal;
-}
-
 int main() {
-   double sellingPrice;  // User defined selling price
+    ifstream hungerFS;
+    string filename;
+    string reader;
+    string cat;
+    string name;
+    string desc;
+    string avail;
+    int startPos = 0;
+    int nextPos;
+    
+    cin >> filename;
+    hungerFS.open(filename);
+    if (! hungerFS.is_open()) {
+        return 1;
+    }
+    while (getline(hungerFS, reader)) {
+        
+        int nextPos = 0;
+        cat = reader.substr(startPos, reader.find('\t'));
+        nextPos = cat.length();
+        
+        name = reader.substr(reader.find('\t') + 1, reader.find('\t')); 
+		//desc = reader.substr(reader.find('\t') + name.length(), reader.find('\t') - 1);
+        //avail = reader.substr(reader.find('\t') + name.length() + desc.length(), reader.find('\t') - 1);
 
-   cout << "Enter item selling price (Ex: 65.00): ";
-   cin >> sellingPrice;
+        // Debug tool:
+        cout << "Debug: nextPos = " << nextPos << " and startPos = " << startPos << endl;
+        cout << reader << endl;
+        cout << "Result: " << endl;
+        cout << cat << endl;
+        cout << name << endl;
+        //cout << desc << endl;
+        //cout << avail << endl;
+        cout << "---------------------" << endl;
+        
+        
 
-   cout << "eBay fee: $" << CalcEbayFee(sellingPrice) << endl;
+        
 
-   return 0;
+    }
+
+
+
+    return 0;
 }

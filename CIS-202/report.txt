@@ -1,0 +1,12 @@
+Sandwiches	Ham	0	32620	543199701	A
+Sandwiches	Chicken	0	32620	543199701	A
+Sandwiches	Cheeseburger	0	32620	543199701	A
+Salads	Caesar	0	32620	543199701	A
+Salads	Asian	0	32620	543199701	A
+Beverages	Water	16	0	543199701	A
+Beverages	Coca-Cola	16	0	543199701	A
+Mexican	food	0	0	543199701	A
+Mexican	food	0	0	543199701	A
+Vegetarian	Avocado	0	0	543199701	A
+
+Averages: midterm1 3.20, midterm2 16310.00, final 543199701.00
