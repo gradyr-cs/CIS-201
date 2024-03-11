@@ -8,6 +8,14 @@
     Date: 03-03-2024
 */
 
+// Important Note: This code runs with the proper library files forked from Replit, but the files here on zyBooks differ from that source.
+// Please see my discord message sent on 3/09/24 with details regarding the differences in 5 source files between replit and zyBooks
+//
+// You can find my working code at https://github.com/gradyr-cs/CIS-201/tree/main/CIS-202/Lab%203-13
+//
+// code runs when compiled with all libraries and when "paste books.txt | ./main
+// after a compile via g++ that includes all of the *.cpp library files in that directory.
+
 #include "LinkedListLibrary.h"
 #include "VectorLibrary.h"
 #include "BookNode.h"
