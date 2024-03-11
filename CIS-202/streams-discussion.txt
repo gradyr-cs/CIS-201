@@ -1,0 +1,23 @@
+What defines a line? Basically, it is a string with a newline at the end;
+
+linux commands
+od -x main.cpp
+this reads the file in bytes
+
+strings are related to pullingin groups of bytes
+
+byte = 8 bits
+ie. 2a2f = 16 bits
+
+look up ASCII chart on duckduck // the od command on line 4 will display the hexidecimal code.
+big ndn vs little ndn... the way the bytes are read. 
+
+Endianness / or 'Endian byte order' - related to Assembly languages etc.
+
+In hexidecimal, 0xa... 0x is the prefix, a is the value
+
+in linux, ctrl D is end of file, and ctrl Z in windows. 
+
+more linux:
+vim
+jobs
