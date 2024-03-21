@@ -1,53 +1,40 @@
-#include <string>
 #include <iostream>
-#include <iomanip>
-#include <fstream>
-
 using namespace std;
 
+class RunnerInfo {
+   public:                                
+      void SetTime(int timeRunSecs);       // Time run in seconds
+      void SetDist(double distRunMiles);   // Distance run in miles
+      double GetSpeedMph();                // Speed in miles/hour
+   __(A)__
+      int timeRun;
+      double distRun;
+};
+
+void __(B)__::SetTime(int timeRunSecs) {
+   timeRun = timeRunSecs;  // timeRun refers to data member
+}
+
+void __(C)__SetDist(double distRunMiles) {
+   distRun = distRunMiles;
+}
+
+double RunnerInfo::GetSpeedMph(){
+   return distRun / (timeRun / 3600.0); // miles / (secs / (hrs / 3600 secs))
+}
+
 int main() {
-    ifstream hungerFS;
-    string filename;
-    string reader;
-    string cat;
-    string name;
-    string desc;
-    string avail;
-    int startPos = 0;
-    int nextPos;
-    
-    cin >> filename;
-    hungerFS.open(filename);
-    if (! hungerFS.is_open()) {
-        return 1;
-    }
-    while (getline(hungerFS, reader)) {
-        
-        int nextPos = 0;
-        cat = reader.substr(startPos, reader.find('\t'));
-        nextPos = cat.length();
-        
-        name = reader.substr(reader.find('\t') + 1, reader.find('\t')); 
-		//desc = reader.substr(reader.find('\t') + name.length(), reader.find('\t') - 1);
-        //avail = reader.substr(reader.find('\t') + name.length() + desc.length(), reader.find('\t') - 1);
+   RunnerInfo runner1; // User-created object of class type RunnerInfo
+   RunnerInfo runner2; // A second object
 
-        // Debug tool:
-        cout << "Debug: nextPos = " << nextPos << " and startPos = " << startPos << endl;
-        cout << reader << endl;
-        cout << "Result: " << endl;
-        cout << cat << endl;
-        cout << name << endl;
-        //cout << desc << endl;
-        //cout << avail << endl;
-        cout << "---------------------" << endl;
-        
-        
+   runner1.SetTime(360);
+   runner1.SetDist(1.2);
 
-        
+   runner2.SetTime(200);
+   runner2.SetDist(0.5);
 
-    }
+   cout << "Runner1's speed in MPH: " << runner1.__(D)__ << endl;
+   cout << "Runner2's speed in MPH: " << __(E)__ << endl;
 
-
-
-    return 0;
+   return 0;
 }
