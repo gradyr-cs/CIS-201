@@ -19,28 +19,28 @@ class Team {
    
     public:
         // mutators
-        SetName(string name);
-        SetWins(int wins);
-        SetLosses(int losses);
+        void SetName(string inName);
+        void SetWins(int inWins);
+        void SetLosses(int inLosses);
         // accessors
-        GetName();
-        GetWins();
-        GetLosses();
+        string GetName() const;
+        int GetWins() const;
+        int GetLosses() const;
 
-        GetWinPercentage();
-        PrintStanding();
+        double GetWinPercentage() const;
+        void PrintStanding() const;
     private: 
         string name;
         int wins;
         int losses;
    
    // TODO: Declare mutator functions - 
-   //       SetName(), SetWins(), SetLosses()
+   //       SetName(), SetWins(), SetLosses() - done
    // TODO: Declare accessor functions - 
-   //       GetName(), GetWins(), GetLosses()
-   // TODO: Declare GetWinPercentage()
-   // TODO: Declare PrintStanding()
-   // TODO: Declare private data members - name, wins, losses
+   //       GetName(), GetWins(), GetLosses() - done
+   // TODO: Declare GetWinPercentage() - done
+   // TODO: Declare PrintStanding() - done
+   // TODO: Declare private data members - name, wins, losses - done
 };
 
 #endif

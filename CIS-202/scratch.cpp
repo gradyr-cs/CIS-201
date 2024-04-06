@@ -1,40 +1,50 @@
+/* 
+    File: main.cpp 
+    Description: Convert to reverse binary 
+    Author: Richard Grady
+    Email: gradyr@student.vvc.edu
+    Course#: cis201
+    Section#: 70107
+    Date: 10-21-2023
+*/
+
 #include <iostream>
+#include <string>
 using namespace std;
 
-class RunnerInfo {
-   public:                                
-      void SetTime(int timeRunSecs);       // Time run in seconds
-      void SetDist(double distRunMiles);   // Distance run in miles
-      double GetSpeedMph();                // Speed in miles/hour
-   __(A)__
-      int timeRun;
-      double distRun;
-};
-
-void __(B)__::SetTime(int timeRunSecs) {
-   timeRun = timeRunSecs;  // timeRun refers to data member
-}
-
-void __(C)__SetDist(double distRunMiles) {
-   distRun = distRunMiles;
-}
-
-double RunnerInfo::GetSpeedMph(){
-   return distRun / (timeRun / 3600.0); // miles / (secs / (hrs / 3600 secs))
-}
-
 int main() {
-   RunnerInfo runner1; // User-created object of class type RunnerInfo
-   RunnerInfo runner2; // A second object
 
-   runner1.SetTime(360);
-   runner1.SetDist(1.2);
+   int x = 0;
+   int y = 0;
+   int z = 0;
+   int i = 0;
+   string binReverse = "";
+   string strInjector = "";
+   
+   cout << "Integer to Binary Converter v1." << endl;
+   cout << "Enter a positive integer: ";
+   
+   cin >> x;
 
-   runner2.SetTime(200);
-   runner2.SetDist(0.5);
+   while (x > 0) { // Algorithm to convert int to binary - (results are reversed)
+      //disable following line to remove console output of preprocessing of the string injector feature
+      //cout << (x % 2);
+      y = x % 2; // used for binary string injector feature - capture value before update
+      x = x / 2;
+      // experimental procedure here - Builds string to process for binary output reversal
+      strInjector = (to_string(y));
+      // cout << "Debug: strInjector = " << strInjector << endl;
+      binReverse = binReverse.insert(y, strInjector);
+   }
+   // cout << "Debug: Reversed binary value of input = " << binReverse << endl;
 
-   cout << "Runner1's speed in MPH: " << runner1.__(D)__ << endl;
-   cout << "Runner2's speed in MPH: " << __(E)__ << endl;
+   z = binReverse.length() - 1;
+   cout << "Binary result: ";
+   for (i = z; i >= 0; --i) { // Reverse the output of the stored value
+      cout << binReverse[i];
+   }
+   
+   cout << endl;
 
    return 0;
 }
