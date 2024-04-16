@@ -1,25 +1,25 @@
-#ifndef FLOWERH
-#define FLOWERH
+#include "Flower.h"
+#include <iostream>
 
-#include "Plant.h"
-#include <string>
-using namespace std;
+void Flower::SetPlantType(bool userIsAnnual) {
+   isAnnual = userIsAnnual;
+}
 
-class Flower : public Plant {
-   public:
-      void SetPlantType(bool userIsAnnual);
+bool Flower::GetPlantType() const {
+   return isAnnual;
+}
 
-      bool GetPlantType() const;
+void Flower::SetColorOfFlowers(string userColorOfFlowers) {
+   colorOfFlowers = userColorOfFlowers;
+}
 
-      void SetColorOfFlowers(string userColorOfFlowers);
+string Flower::GetColorOfFlowers() const {
+   return colorOfFlowers;
+}
 
-      string GetColorOfFlowers() const;
-
-      void PrintInfo() const;
-
-   private:
-      bool isAnnual;
-      string colorOfFlowers;
-};
-
-#endif
+void Flower::PrintInfo() const {
+   cout << "   Plant name: " << plantName << endl;
+   cout << "   Cost: " << plantCost << endl;
+   cout << "   Annual: " << boolalpha << isAnnual << endl;
+   cout << "   Color of flowers: " << colorOfFlowers << endl;
+}

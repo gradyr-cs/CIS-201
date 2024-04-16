@@ -1,50 +1,66 @@
-/* 
-    File: main.cpp 
-    Description: Convert to reverse binary 
-    Author: Richard Grady
-    Email: gradyr@student.vvc.edu
-    Course#: cis201
-    Section#: 70107
-    Date: 10-21-2023
+/*
+Write the PrintItem() function for the base class. Sample output for below program:
+Last name: Smith
+First and last name: Bill Jones
+Hint: Use the keyword virtual to make PrintItem() a virtual function.
 */
 
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
+class BaseItem {
+public:
+   void SetLastName(string providedName) {
+      lastName = providedName;
+   };
+
+   // FIXME: Define PrintItem() member function
+   virtual void PrintItem() const {
+      cout << "Last name: " << lastName << endl;
+   };
+
+   /* Your solution goes here  */
+
+protected:
+   string lastName;
+};
+
+class DerivedItem : public BaseItem {
+public:
+   void SetFirstName(string providedName) {
+      firstName = providedName;
+   };
+
+   void PrintItem() const override {
+      cout << "First and last name: ";
+      cout << firstName << " " << lastName << endl;
+   };
+
+private:
+   string firstName;
+};
+
 int main() {
+   BaseItem*    baseItemPtr    = nullptr;
+   DerivedItem* derivedItemPtr = nullptr;
+   vector<BaseItem*> itemList;
+   unsigned int i;
 
-   int x = 0;
-   int y = 0;
-   int z = 0;
-   int i = 0;
-   string binReverse = "";
-   string strInjector = "";
-   
-   cout << "Integer to Binary Converter v1." << endl;
-   cout << "Enter a positive integer: ";
-   
-   cin >> x;
+   baseItemPtr = new BaseItem();
+   baseItemPtr->SetLastName("Smith");
 
-   while (x > 0) { // Algorithm to convert int to binary - (results are reversed)
-      //disable following line to remove console output of preprocessing of the string injector feature
-      //cout << (x % 2);
-      y = x % 2; // used for binary string injector feature - capture value before update
-      x = x / 2;
-      // experimental procedure here - Builds string to process for binary output reversal
-      strInjector = (to_string(y));
-      // cout << "Debug: strInjector = " << strInjector << endl;
-      binReverse = binReverse.insert(y, strInjector);
+   derivedItemPtr = new DerivedItem();
+   derivedItemPtr->SetLastName("Jones");
+   derivedItemPtr->SetFirstName("Bill");
+
+   itemList.push_back(baseItemPtr);
+   itemList.push_back(derivedItemPtr);
+
+   for (i = 0; i < itemList.size(); ++i) {
+      itemList.at(i)->PrintItem();
    }
-   // cout << "Debug: Reversed binary value of input = " << binReverse << endl;
-
-   z = binReverse.length() - 1;
-   cout << "Binary result: ";
-   for (i = z; i >= 0; --i) { // Reverse the output of the stored value
-      cout << binReverse[i];
-   }
-   
-   cout << endl;
 
    return 0;
 }

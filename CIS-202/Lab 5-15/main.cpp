@@ -35,7 +35,15 @@ LAB ACTIVITY
 5.15.1: LAB: Plant information (vector)
 */
 
-// header here
+/* 
+    File: main.cpp
+    Description: 5.15.1: LAB: Plant information (vector)
+    Author: Richard Grady
+    Email: gradyr@student.vvc.edu
+    Course#: cis202
+    Section#: 30402
+    Date: 04-05-2024
+*/
 
 #include "Plant.h"
 #include "Flower.h"
@@ -46,26 +54,78 @@ LAB ACTIVITY
 using namespace std;
 
 // TODO: Define a PrintVector function that prints a vector of plant (or flower) object pointers
+void PrintVector(vector<Plant*> myGarden) {
+   for (size_t i = 0; i < myGarden.size(); ++i) {
+      cout << "Plant " << i + 1 << " Information:" << endl;
+      myGarden.at(i)->PrintInfo();
+      cout << endl; // proper spacing for whitespace
+   }
+}
 
 int main() {
    // TODO: Declare a vector called myGarden that can hold object of type plant pointer
+   vector<Plant*> myGarden;
 
    // TODO: Declare variables - plantName, plantCost, flowerName, flowerCost,
    //       colorOfFlowers, isAnnual
+   string plantName;
+   int plantCost;
+   string flowerName;
+   int flowerCost;
+   string colorOfFlowers;
+   string annual;
+   bool isAnnual;
    string input;
 
    cin >> input;
 
+   // This will process the user input data per whitespace requirements.
+   // while input != -1, the logic will branch based on plant or flower and then call functions of the class.
    while(input != "-1") {
    // TODO: Check if input is a plant or flower
    //       Store as a plant object or flower object
    //       Add to the vector myGarden
+      if (input == "plant") {
+         cout << "Debug: Entered plant branch" << endl;
+         cin >> plantName >> plantCost;
+         Plant* plant = new Plant();
+         plant->SetPlantName(plantName);
+         plant->SetPlantCost(plantCost);;
+         myGarden.push_back(plant);
+         
+      } 
+      else if (input == "flower") {
+         cout << "Debug: Entered flower branch" << endl;
+         cin >> flowerName >> flowerCost >> annual >> colorOfFlowers;
+         Flower* flower = new Flower();
+         flower->SetPlantName(flowerName);
+         flower->SetPlantCost(flowerCost);
+         // endless loop happens here, experimental fix inc...
+         // This will convert the string to a boolean
+         if (annual == "true") {
+            isAnnual = true;
+         } 
+         else {
+            isAnnual = false;
+         }
+         flower->SetPlantType(isAnnual);
+         flower->SetColorOfFlowers(colorOfFlowers);
+         myGarden.push_back(flower);
+         
+      }
+   
+
+      cout << "Debug: left if branch - Give next input to enter the top of the while loop." << endl;
+      
       cin >> input;
    }
 
    // TODO: Call the method PrintVector to print myGarden
+   PrintVector(myGarden);
 
+   // This loop will delete the objects in the vector to prevent memory leaks.
    for (size_t i = 0; i < myGarden.size(); ++i) {
+      //cout << "Debug: Deleting object at index " << i << endl;
       delete myGarden.at(i);
    }
    
