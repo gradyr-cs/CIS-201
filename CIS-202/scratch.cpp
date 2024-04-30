@@ -1,66 +1,52 @@
-/*
-Write the PrintItem() function for the base class. Sample output for below program:
-Last name: Smith
-First and last name: Bill Jones
-Hint: Use the keyword virtual to make PrintItem() a virtual function.
-*/
-
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
-class BaseItem {
-public:
-   void SetLastName(string providedName) {
-      lastName = providedName;
-   };
-
-   // FIXME: Define PrintItem() member function
-   virtual void PrintItem() const {
-      cout << "Last name: " << lastName << endl;
-   };
-
-   /* Your solution goes here  */
-
-protected:
-   string lastName;
-};
-
-class DerivedItem : public BaseItem {
-public:
-   void SetFirstName(string providedName) {
-      firstName = providedName;
-   };
-
-   void PrintItem() const override {
-      cout << "First and last name: ";
-      cout << firstName << " " << lastName << endl;
-   };
-
-private:
-   string firstName;
-};
-
 int main() {
-   BaseItem*    baseItemPtr    = nullptr;
-   DerivedItem* derivedItemPtr = nullptr;
-   vector<BaseItem*> itemList;
-   unsigned int i;
-
-   baseItemPtr = new BaseItem();
-   baseItemPtr->SetLastName("Smith");
-
-   derivedItemPtr = new DerivedItem();
-   derivedItemPtr->SetLastName("Jones");
-   derivedItemPtr->SetFirstName("Bill");
-
-   itemList.push_back(baseItemPtr);
-   itemList.push_back(derivedItemPtr);
-
-   for (i = 0; i < itemList.size(); ++i) {
-      itemList.at(i)->PrintItem();
+   stringstream ss;
+   string userInput;
+   vector<int> numbers = {7, 8, 5};
+   int value;
+   int result;
+   
+   // Failed conversion will throw ios_base::failure
+   ss.exceptions(ios::failbit);
+   
+   getline(cin, userInput);
+   
+   while (userInput != "end") {
+      try {
+         ss.str("");
+         ss.clear();
+         ss << userInput;
+         ss >> value;
+         
+         // Possible logic_error: out of range
+         if (value < 0) {
+            result = numbers.at(value);
+         }
+         else {
+            // Division by zero will throw runtime_error
+            if (value == 0) {
+               throw runtime_error("z");
+            }
+            result = 60 / value;
+            cout << result << endl;
+         }         
+      }
+      catch (ios_base::failure& excpt) {
+         cout << "t" << endl;
+      }
+      catch (...) {
+         cout << "x" << endl;
+      }
+      getline(cin, userInput);
+      ss.clear();
    }
-
+   cout << "OK" << endl;
+   
    return 0;
 }
